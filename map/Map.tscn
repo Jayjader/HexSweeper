@@ -6,8 +6,5 @@
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility" ]
-width = 10
-height = 10
-hexScale = 32
 
 

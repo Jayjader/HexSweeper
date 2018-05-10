@@ -1,0 +1,35 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=3
+
+[application]
+
+config/name="Minesweeper"
+run/main_scene="res://Map.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=800
+window/size/height=640
+window/dpi/allow_hidpi=true
+
+[editor_plugins]
+
+[global]
+
+plugin=false
+
+[gui]
+
+timers/text_edit_idle_detect_sec=2
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

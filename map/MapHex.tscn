@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://map/HexOutline.gd" type="Script" id=1]
+
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Node2D
+
+const STATE = {
+	\"UNDISCOVERED\": -1,
+	\"EMPTY\": 0,
+	\"FLAGGED\": -3,
+	\"QUESTION_MARK\": -4,
+	}
+	
+const BASE_COLOR = Color(129400)
+
+const COLOR = {
+	STATE.UNDISCOVERED: BASE_COLOR,
+	STATE.EMPTY: BASE_COLOR * 0.5,
+}
+
+func handleClick():
+	pass
+
+var visual_state
+
+func _ready():
+	visual_state = STATE.UNDISCOVERED
+
+func _draw():
+	get_node(\"HexBackground\")"
+
+[node name="MapHex" type="Node2D" index="0"]
+
+script = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="HexOutline" type="Node2D" parent="." index="0"]
+
+z_index = 1
+script = ExtResource( 1 )
+_sections_unfolded = [ "Visibility", "Z Index" ]
+
+[node name="HexBackground" type="Polygon2D" parent="." index="1"]
+
+polygon = PoolVector2Array( 0.866, -0.5, 0, -1, -0.866, -0.5, -0.866, 0.5, 0, 1, 0.866, 0.5 )
+uv = PoolVector2Array(  )
+color = Color( 0.0727539, 0.582031, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+_sections_unfolded = [ "Visibility" ]
+
+

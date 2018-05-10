@@ -10,15 +10,11 @@ enum STATE {
 	}
 
 var BASE_COLOR
-
-func handleClick():
-	pass
-
 var visual_state
 
 func _ready():
-	visual_state = STATE.UNDISCOVERED
-	BASE_COLOR = get_node("HexBackground").color
+	self.visual_state = STATE.UNDISCOVERED
+	self.BASE_COLOR = get_node("HexBackground").color
 
 func _draw():
 	get_node("HexBackground")

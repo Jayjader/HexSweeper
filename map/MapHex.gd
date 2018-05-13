@@ -11,10 +11,13 @@ enum STATE {
 
 var BASE_COLOR
 var visual_state
+var highlighted
 
 func _ready():
 	self.visual_state = STATE.UNDISCOVERED
-	self.BASE_COLOR = get_node("HexBackground").color
+	self.BASE_COLOR = get_node('HexBackground').color
 
-func _draw():
-	get_node("HexBackground")
+func highlight():
+	self.highlighted = not self.highlighted
+	$"HexBackground".color = BASE_COLOR.lightened(0.2) if self.highlighted else BASE_COLOR
+	$"HexBackground".update()

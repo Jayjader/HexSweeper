@@ -35,6 +35,6 @@ func _input(event):
 		if event.button_index == BUTTON_LEFT && event.is_pressed():
 			var click_position = self.get_local_mouse_position()
 			var hex = Util.cube_to_evenr(Util.pixel_to_cube(click_position, self.hexScale))
-			if 0 <= hex.x && hex.x <= width:
-				if 0 <= hex.y && hex.y <= height:
+			if 0 <= hex.x && hex.x < width:
+				if 0 <= hex.y && hex.y < height:
 					self._map[hex].reveal()

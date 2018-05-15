@@ -27,11 +27,8 @@ func reveal():
 	if self.visual_state == STATE.UNDISCOVERED:
 		self.visual_state = STATE.MINE if self.mine else STATE.EMPTY
 
-var sets = 0
 func set_state(new_state):
-	print('setter entered', sets)
-	sets += 1
 	visual_state = new_state
 	match new_state:
-		STATE.UNDISCOVERED: get_node("HexBackground").color = BASE_COLOR
+		STATE.UNDISCOVERED: $"HexBackground".color = BASE_COLOR
 		STATE.EMPTY: get_node("HexBackground").color = Color("cbcbcb")

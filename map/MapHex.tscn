@@ -7,7 +7,7 @@
 [node name="MapHex" type="Node2D"]
 
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="HexOutline" type="Node2D" parent="." index="0"]
 
@@ -30,7 +30,7 @@ texture_rotation_degrees = 0.0
 invert_enable = false
 invert_border = 100.0
 script = ExtResource( 3 )
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Visibility", "Z Index" ]
 baseColor = Color( 0.184314, 0.760784, 0, 1 )
 
 

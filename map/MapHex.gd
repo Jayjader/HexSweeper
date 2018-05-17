@@ -20,8 +20,8 @@ func _ready():
 
 func highlight():
 	self.highlighted = not self.highlighted
-	get_node("./HexBackground").color = BASE_COLOR.lightened(0.2) if self.highlighted else BASE_COLOR
-	get_node("HexBackground").update()
+	$"HexBackground".color = BASE_COLOR.lightened(0.2) if self.highlighted else BASE_COLOR
+	$"HexBackground".update()
 
 func reveal():
 	if self.visual_state == STATE.UNDISCOVERED:
@@ -30,5 +30,7 @@ func reveal():
 func set_state(new_state):
 	visual_state = new_state
 	match new_state:
-		STATE.UNDISCOVERED: $"HexBackground".color = BASE_COLOR
-		STATE.EMPTY: get_node("HexBackground").color = Color("cbcbcb")
+		STATE.UNDISCOVERED:
+			$"HexBackground".color = BASE_COLOR
+		STATE.EMPTY:
+			$"HexBackground".color = Color("663300")

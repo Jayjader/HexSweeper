@@ -49,7 +49,7 @@ func _ready():
 			hex.transform = hex.transform.translated(Vector2(
 				self.hexWidth * x + self.xOffset(y), self.yDistBetweenHexes * y))
 			hex.transform = hex.transform.scaled(hexScale * Vector2(1, 1))
-			hex.mine = randf() > 0.5
+			hex.mine = randf() > 0.8
 			self._map[Vector2(x, y)] = hex
 			self.add_child(hex, true)
 

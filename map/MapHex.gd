@@ -13,8 +13,9 @@ enum STATE {
 
 onready var BASE_COLOR = get_node('HexBackground').color
 var visual_state setget set_state
-var highlighted
-var mine
+var highlighted = false
+var mine = false
+var flag = false
 var neighbors = 0
 var offset_position setget _set_offset_position, _get_offset_position
 var cube_position setget _set_cube_position, _get_cube_position
@@ -55,3 +56,5 @@ func set_state(new_state):
 			$"HexBackground".color = BASE_COLOR
 		STATE.EMPTY:
 			$"HexBackground".color = Color("663300")
+		STATE.MINE:
+			$"HexBackground".color = Color(1, 0, 0)

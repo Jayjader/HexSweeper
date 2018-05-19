@@ -46,6 +46,7 @@ func highlight():
 func reveal():
 	if self.visual_state == STATE.UNDISCOVERED:
 		self.visual_state = STATE.MINE if self.mine else STATE.EMPTY
+	return self.visual_state != STATE.MINE
 
 func set_state(new_state):
 	visual_state = new_state

@@ -31,8 +31,7 @@ func reveal(offsets):
 		[var offset, ..]:
 			var hex = self._map[offset]
 			if hex.visual_state == hex.STATE.UNDISCOVERED:
-				hex.reveal()
-				if hex.neighbors == 0:
+				if hex.reveal() && hex.neighbors == 0:
 					for n in Util.offset_neighbors(hex.offset_position):
 						if self.is_on_map(n):
 							offsets.append(n)

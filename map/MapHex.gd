@@ -13,7 +13,8 @@ enum STATE {
 
 onready var BASE_COLOR = get_node('HexBackground').color
 var visual_state setget set_state
-var highlighted = false
+var highlighted setget _highlight
+var _highlighted = false
 var mine = false
 var flag = false
 var neighbors = 0
@@ -39,8 +40,8 @@ func _set_cube_position(cube):
 func _ready():
 	self.visual_state = STATE.UNDISCOVERED
 
-func highlight():
-	self.highlighted = not self.highlighted
+func _highlight():
+	highlighted = not self.highlighted
 	$"HexBackground".color = BASE_COLOR.lightened(0.2) if self.highlighted else BASE_COLOR
 	$"HexBackground".update()
 

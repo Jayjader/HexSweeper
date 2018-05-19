@@ -30,11 +30,13 @@ func reveal(offsets):
 			pass
 		[var offset, ..]:
 			var hex = self._map[offset]
-			if hex.visual_state == hex.STATE.UNDISCOVERED:
+
+			if hex.visual_state == hex.STATE.UNDISCOVERED && !hex.flag:
 				if hex.reveal() && hex.neighbors == 0:
 					for n in Util.offset_neighbors(hex.offset_position):
 						if self.is_on_map(n):
 							offsets.append(n)
+
 			offsets.pop_front()
 			self.reveal(offsets)
 
@@ -45,11 +47,12 @@ func _ready():
 	for y in range(self.height):
 		for x in range(self.width):
 			var hex = preload("res://map/MapHex.tscn").instance()
+
 			hex.offset_position = Vector2(x, y)
-			hex.transform = hex.transform.translated(Vector2(
-				self.hexWidth * x + self.xOffset(y), self.yDistBetweenHexes * y))
+			hex.transform = hex.transform.translated(Vector2(self.hexWidth * x + self.xOffset(y), self.yDistBetweenHexes * y))
 			hex.transform = hex.transform.scaled(hexScale * Vector2(1, 1))
 			hex.mine = randf() > 0.8
+
 			self._map[Vector2(x, y)] = hex
 			self.add_child(hex, true)
 
@@ -60,16 +63,44 @@ func _ready():
 
 
 func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && event.is_pressed():
-			var click_position = self.get_local_mouse_position()
-			var hex = Util.cube_to_evenr(Util.pixel_to_cube(click_position, self.hexScale))
-			if self.is_on_map(hex):
-				self.reveal([hex])
+	if event is InputEventMouseButton && event.is_pressed():
+		var click_position = self.get_local_mouse_position()
+		var hex_offset = Util.cube_to_evenr(Util.pixel_to_cube(click_position, self.hexScale))
+
+		if self.is_on_map(hex_offset):
+			if event.button_index == BUTTON_LEFT:
+				self.reveal([hex_offset])
 				update()
+
+			elif event.button_index == BUTTON_RIGHT:
+				var hex = self._map[hex_offset]
+
+				if hex.visual_state == hex.STATE.UNDISCOVERED:
+					hex.flag = !hex.flag
+
+				elif hex.visual_state == hex.STATE.EMPTY:
+					var to_reveal = []
+					var neighbors = 0
+
+					for neighbor in Util.offset_neighbors(hex_offset):
+						if self.is_on_map(neighbor):
+							neighbors += 1
+
+							if !self._map[neighbor].flag:
+								to_reveal.append(neighbor)
+
+					if neighbors - to_reveal.size() == hex.neighbors:
+						self.reveal(to_reveal)
+
+				update()
+
 
 func _draw():
 	for hex in self._map.values():
 		if hex.visual_state == hex.STATE.EMPTY:
-			$"MapOverlay".hexes.append(hex)
+			$"MapOverlay".new_revealed_hexes.append(hex)
+
+		elif hex.flag:
+			$"MapOverlay".new_flagged_hexes.append(hex)
+
 	$"MapOverlay".update()

@@ -9,8 +9,10 @@ func _ready():
 
 func _draw():
 	for hex in self.hexes:
-		var n = String(hex.neighbors)
-		var offset = Transform2D().scaled(0.5 * Vector2(-1, 1)) * fira_font.get_string_size(n)
-		offset = offset.snapped(Vector2(1, -1))
-		draw_string(fira_font, hex.position + offset, n)
+		var n = hex.neighbors
+		if n > 0:
+			n = String(n)
+			var offset = Transform2D().scaled(0.5 * Vector2(-1, 1)) * fira_font.get_string_size(n)
+			offset = offset.snapped(Vector2(1, -1))
+			draw_string(fira_font, hex.position + offset, n)
 	self.hexes = []

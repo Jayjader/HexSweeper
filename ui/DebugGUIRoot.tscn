@@ -23,7 +23,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 2 )
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Rect", "Visibility" ]
 
 [node name="HexCoords" type="Label" parent="DebugGUIControlRoot" index="0"]
 

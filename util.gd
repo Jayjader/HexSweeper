@@ -16,15 +16,13 @@ static func axial_to_cube(axial):
 	return Vector3(axial.x, axial.y, z)
 
 static func cube_to_axial(cube):
-	assert cube is Vector3()
 	return Vector2(cube.x, cube.y)
 
 static func cube_to_evenr(cube):
 	return Vector2(cube.x + (cube.z + (int(cube.z) & 1)) / 2, cube.z)
 
 static func evenr_to_cube(evenr):
-	assert evenr is Vector3()
-	var x = evenr.x - (evenr.y + (evenr.y & 1)) / 2
+	var x = evenr.x - (evenr.y + (int(evenr.y) & 1)) / 2
 	var z = evenr.y
 	var y = -x-z
 	return Vector3(x, y, z)
@@ -54,9 +52,15 @@ static func cube_neighbors(cube):
 	return neighbours
 
 static func offset_neighbor(offset, direction):
-	var parity = offset.y & 1
+	var parity = int(offset.y) & 1
 	var dir = offset_directions[parity][direction]
 	return offset + dir
+
+static func offset_neighbors(offset):
+	var neighbors = []
+	for dir in range(6):
+		neighbors.append(offset_neighbor(offset, dir))
+	return neighbors
 
 static func pixel_to_cube(point, hexScale):
 	var q = (sqrt(3) * point.x / 3 - point.y / 3) / hexScale

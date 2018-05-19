@@ -12,7 +12,7 @@ width = 10
 height = 10
 hexScale = 32
 
-[node name="MapOverlay" type="Node2D" parent="." index="100"]
+[node name="MapOverlay" type="Node2D" parent="." index="0"]
 
 z_index = 1
 script = ExtResource( 2 )

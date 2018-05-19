@@ -6,4 +6,3 @@ func _input(event):
 		gui_root.visible = !gui_root.visible
 		gui_root.update()
 		get_tree().set_input_as_handled()
-		print('toggle debug: ', gui_root.visible)

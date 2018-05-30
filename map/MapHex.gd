@@ -1,5 +1,6 @@
-tool
 extends Node2D
+
+signal game_over
 
 const Util = preload("res://util.gd")
 
@@ -11,7 +12,7 @@ enum STATE {
 	MINE,
 	}
 
-onready var BASE_COLOR = get_node('HexBackground').color
+onready var BASE_COLOR = $"HexBackground".color
 var visual_state setget set_state
 var highlighted setget _highlight
 var _highlighted = false
@@ -47,7 +48,11 @@ func _highlight():
 
 func reveal():
 	if self.visual_state == STATE.UNDISCOVERED:
+		if self.mine:
+			self.emit_signal("game_over")
+
 		self.visual_state = STATE.MINE if self.mine else STATE.EMPTY
+
 	return self.visual_state != STATE.MINE
 
 func set_state(new_state):

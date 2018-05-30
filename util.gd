@@ -66,3 +66,6 @@ static func pixel_to_cube(point, hexScale):
 	var q = (sqrt(3) * point.x / 3 - point.y / 3) / hexScale
 	var r = (2 * point.y / 3) / hexScale
 	return cube_round(Vector3(q, - q - r, r))
+
+static func char_offset(font, c):
+	return (Transform2D().scaled(0.5 * Vector2(-1, 1)) * font.get_string_size(c)).snapped(Vector2(1, -1))

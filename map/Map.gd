@@ -46,6 +46,7 @@ func generate():
 			hex.transform = hex.transform.translated(Vector2(self.hexWidth * x + self.xOffset(y), self.yDistBetweenHexes * y))
 			hex.transform = hex.transform.scaled(hexScale * Vector2(1, 1))
 			hex.mine = randf() > 0.8
+			hex.connect("game_over", $"../EndGameGuiControlRoot", "toggle")
 
 			self._map[Vector2(x, y)] = hex
 			self.add_child(hex, true)
@@ -55,11 +56,9 @@ func generate():
 			if self.is_on_map(neighbor) && self._map[neighbor].mine:
 				hex.neighbors += 1
 
-func _on_ReturnToGameButton_pressed():
-	self.pause = false
-
 func _on_NewGameButton_pressed():
 	self.generate()
+	self.update()
 	self.pause = false
 
 func _ready():

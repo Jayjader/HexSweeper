@@ -1,11 +1,8 @@
 extends Control
 
-signal pause_game
-signal resume_game
-
 func toggle():
-	$"EndGameDialogue".popup()
-	if $"EndGameDialogue".visible:
-		emit_signal("pause_game")
+	var popup = $"EndGameDialogue"
+	if popup.visible:
+		popup.visible = false
 	else:
-		emit_signal("resume_game")
+		popup.popup()
